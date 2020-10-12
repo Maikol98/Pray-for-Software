@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComentarioTable extends Migration
+class CreateUbicacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateComentarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('comentarios', function (Blueprint $table) {
+        Schema::create('ubicaciones', function (Blueprint $table) {
             $table->Increments('id');
-            $table->String('titulo');
-            $table->text('descripcion');
+            $table->double('latitud');
+            $table->double('longitud');
+            $table->String('descripcion')->nullable();
             $table->integer('id_negocio')->unsigned();
-            $table->integer('id_persona')->unsigned();
             $table->foreign('id_negocio')->references('id')->on('negocios');
-            $table->foreign('id_persona')->references('carnet')->on('personas');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateComentarioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comentarios');
+        Schema::dropIfExists('ubicaciones');
     }
 }

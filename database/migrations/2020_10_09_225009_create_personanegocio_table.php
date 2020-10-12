@@ -18,7 +18,7 @@ class CreatePersonanegocioTable extends Migration
             $table->integer('id_negocio')->unsigned();
             $table->primary(['id_persona','id_negocio']);
             $table->foreign('id_negocio')->references('id')->on('negocios');
-            $table->foreign('id_persona')->references('id')->on('personas');
+            $table->foreign('id_persona')->references('carnet')->on('personas');
         });
     }
 

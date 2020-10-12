@@ -14,11 +14,10 @@ class CreatePersonaTable extends Migration
     public function up()
     {
         Schema::create('personas', function (Blueprint $table) {
-            $table->Increments('id');
-            $table->integer('carnet');
+            $table->integer('carnet')->unsigned();
+            $table->primary('carnet');
             $table->String('nombre');
             $table->String('apellido');
-            $table->String('correo');
             $table->String('direccion');
             $table->integer('telefono');
             $table->String('tipo');    //Socio = 1   usuario normal = 0

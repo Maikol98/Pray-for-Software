@@ -15,7 +15,7 @@ class NegocioController extends Controller
         $negocio->buscasocio = 1;
         $negocio->update();
 
-        return response()->json($negocio, 200);
+        return json_encode('actualizado');
     }
 
     //BUSCAN SOCIOS
@@ -38,7 +38,7 @@ class NegocioController extends Controller
 
     public function store(Request $request)
     {
-        $negocio = new Negocio($request->all);
+        $negocio = new Negocio($request->all());
         $negocio->buscasocio = 0;
         $negocio->save();
 

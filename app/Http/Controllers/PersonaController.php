@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Persona;
+use App\User;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -39,6 +40,15 @@ class PersonaController extends Controller
         $persona->tipo = 0;
         $persona->save();
 
+        $contra = $request->input('password');
+
+        $user = new User();
+        $user->name = $request->input('nombre');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($contra);
+        $user->idCliente = $request->input('CI');
+
+        $user->save();
         return response()->json($persona, 200);
 
         // return redirect()->route('nombre de la ruta');
