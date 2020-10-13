@@ -82,7 +82,7 @@ class UbicacionController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     *asdadsads
      * @param  \App\Ubicacion  $ubicacion
      * @return \Illuminate\Http\Response
      */
