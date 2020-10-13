@@ -10,7 +10,7 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        $categoria = Categoria::all();
+        $categoria = Categoria::where('estado',1)->get();
 
         return response()->json($categoria, 200);
     }

@@ -11,7 +11,7 @@ class PersonaController extends Controller
     //usuarios NO socios
     public function index()
     {
-        $persona = Persona::where('tipo',0)->get();
+        $persona = Persona::where('tipo',0)->where('estado',1)->get();
 
         return response()->json($persona, 200);
         //return view();    colocan la vista si queriene
@@ -38,6 +38,8 @@ class PersonaController extends Controller
     {
         $persona = new Persona($request->all());
         $persona->tipo = 0;
+        $persona->estado = 1;
+
         $persona->save();
 
         $contra = $request->input('password');
@@ -46,7 +48,7 @@ class PersonaController extends Controller
         $user->name = $request->input('nombre');
         $user->email = $request->input('email');
         $user->password = bcrypt($contra);
-        $user->idCliente = $request->input('CI');
+        $user->id_persona = $request->input('carnet');
 
         $user->save();
         return response()->json($persona, 200);
@@ -55,11 +57,23 @@ class PersonaController extends Controller
     }
 
     // AÑADIR SOCIOS
-    public function storeSocio()
+    public function storeSocio(Request $request)
     {
         $persona = new Persona($request->all());
         $persona->tipo = 1;
+        $persona->estado = 1;
+
         $persona->save();
+
+        $contra = $request->input('password');
+
+        $user = new User();
+        $user->name = $request->input('nombre');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($contra);
+        $user->id_persona = $request->input('carnet');
+
+        $user->save();
 
         return response()->json($persona, 200);
     }
@@ -84,7 +98,7 @@ class PersonaController extends Controller
 
     public function update(Request $request, $carnet)
     {
-        $persona = Persona::where('carnet', $carnet);
+        $persona = Persona::findOrFail($carnet);
 
         $persona->nombre = $request->input('nombre');
         $persona->apellido = $request->input('apellido');
@@ -101,7 +115,7 @@ class PersonaController extends Controller
 
     public function destroy($carnet)
     {
-        $persona = Persona::where('carnet', $carnet);
+        $persona = Persona::findOrFail($carnet);
 
         $persona->estado = 0;
         $persona->update();

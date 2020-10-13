@@ -11,6 +11,7 @@ class Persona extends Model
     public $timestamps=false;
 
     protected $fillable=[
+        'carnet',
         'nombre',
         'apellido',
         'correo',

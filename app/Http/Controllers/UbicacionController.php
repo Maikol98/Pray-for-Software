@@ -88,7 +88,9 @@ class UbicacionController extends Controller
      */
     public function destroy( $id)
     {
-        Ubicaion::findOrFail($id)->delete();
+        $ubicacion = Ubicacion::findOrFail($id);
+
+        $ubicacion->delete();
 
         return json_encode('Eliminado');
     }

@@ -40,16 +40,19 @@ class NegocioController extends Controller
     {
         $negocio = new Negocio($request->all());
         $negocio->buscasocio = 0;
+        $negocio->estado = 1;
         $negocio->save();
 
         return response()->json($negocio, 200);
     }
 
     //--------hay que probarlo----------
-    public function show( $id)
+    public function show( Request $request)
     {
+        $id = $request->input('nombre');
+
         $negocio = DB::table('negocios')
-            ->where('nombre', 'like', '%' + $id +'%' )->get();
+            ->where('nombre', 'like', '%'.$id.'%' )->get();
 
         return response()->json($negocio, 200);
     }
@@ -63,10 +66,9 @@ class NegocioController extends Controller
 
     public function update(Request $request, $id)
     {
-        $negocio = Negocio::where('id', $id)->get();
+        $negocio = Negocio::findOrFail($id);
 
         $negocio->nombre = $request->input('nombre');
-        $negocio->ubicacion = $request->input('ubicacion');
         $negocio->descripcion = $request->input('descripcion');
 
         $negocio->update();
@@ -77,7 +79,7 @@ class NegocioController extends Controller
 
     public function destroy( $id)
     {
-        $negocio = Negocio::where('id',$id)->get();
+        $negocio = Negocio::findOrFail($id);
         $negocio->estado = 0;
 
         $negocio->update();

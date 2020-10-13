@@ -33,7 +33,7 @@ class PersoanNegocioController extends Controller
     //ENVIAMOS DATOS POR FURMULARIO
     public function store(Request $request)
     {
-        $negocio = new PersonaNegocio();
+        $negocio = new PersoanNegocio();
         $negocio->id_persona = $request->input('id_persona');
         $negocio->id_negocio = $request->input('id_negocio');
         $negocio->save();
@@ -42,9 +42,9 @@ class PersoanNegocioController extends Controller
 
 
     //ENVIAMOS DATOS POR RUTA
-    public function store(Request $request, $idPersona, $idNegocio)
+    public function stores(Request $request, $idPersona, $idNegocio)
     {
-        $negocio = new PersonaNegocio();
+        $negocio = new PersoanNegocio();
         $negocio->id_persona = $idPersona;
         $negocio->id_negocio = $idNegocio;
         $negocio->save();
@@ -57,19 +57,19 @@ class PersoanNegocioController extends Controller
     public function show( $idNegocio)
     {
         $personas = DB::table('personanegocio')
-            ->join('personas', 'personanegocio.id_persona', '=', 'personas.id')
-            ->select('personas.id','personas.carnet','personas.nombre','personas.correo','personas.telefono')
+            ->join('personas', 'personanegocio.id_persona', '=', 'personas.carnet')
+            ->select('personas.carnet','personas.nombre','personas.telefono')
             ->where('personanegocio.id_negocio','=', $idNegocio)->get();
         return response()->json($personas, 200);
     }
 
 
      // OBTENEMOS LOS NEGOCIOS QUE TIENE UN SOCIO EN ESPEFICO
-     public function show( $idSocio)
+     public function showS( $idSocio)
      {
          $negocio = DB::table('personanegocio')
              ->join('negocios', 'personanegocio.id_negocio', '=', 'negocios.id')
-             ->select('negocios.id','negocios.nombre','negocios.ubicacion')
+             ->select('negocios.id','negocios.nombre')
              ->where('personanegocio.id_persona','=', $idSocio)->get();
          return response()->json($negocio, 200);
      }
