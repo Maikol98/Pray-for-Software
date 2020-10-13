@@ -10,8 +10,8 @@ class NegocioController extends Controller
 {
 
     //Todos mis negocios
-    public function Todos($carnet){
-        $negocio = Negocios::where('id_persona',$carnet)->get();
+    public function Todos( $carnet){
+        $negocio = Negocio::where('id_persona',$carnet)->get();
         return response()->json($negocio, 200);
     }
 
