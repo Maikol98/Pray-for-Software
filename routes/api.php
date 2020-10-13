@@ -36,7 +36,7 @@ Route::get('Comentario/{idNegocio}','ComentarioController@show'); //-
 
 //------------------NEGOCIO-------------------
 //CATALOGO es el index
-Route::post('todos','NegocioController@Todos');
+Route::post('todos/{carnet}','NegocioController@Todos');
 Route::apiResource('Negocio','NegocioController'); //-
 Route::get('Negocio/buscar','NegocioController@show'); //-
 
