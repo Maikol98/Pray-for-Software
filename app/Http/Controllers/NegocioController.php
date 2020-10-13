@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class NegocioController extends Controller
 {
 
+    //Todos mis negocios
+    public function Todos($carnet){
+        $negocio = Negocios::where('id_persona',$carnet)->get();
+        return response()->json($negocio, 200);
+    }
+
+
+
+
     //TE ACTIVA EL BUSCAR SOCIO ALV (actualiza los valores)
     public function socio( $idNegocio ){
         $negocio = Negocio::findOrFail($idNegocio);
@@ -46,7 +55,6 @@ class NegocioController extends Controller
         return response()->json($negocio, 200);
     }
 
-    //--------hay que probarlo----------
     public function show( Request $request)
     {
         $id = $request->input('nombre');
