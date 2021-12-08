@@ -16,9 +16,9 @@ class userController extends Controller
 
         $resultado = DB::table('users')->where('email',$email)
             ->first();
-
+            return response()->json($resultado, 200);
         if (is_null($resultado)) {
-            return json_encode("Error");
+            return json_encode(0);
         }else {
             if(Hash::check($request->password, $resultado->password)){
                 return response()->json($resultado, 200);
