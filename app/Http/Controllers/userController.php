@@ -16,7 +16,7 @@ class userController extends Controller
 
         $resultado = DB::table('users')->where('email',$email)
             ->first();
-            return response()->json($resultado, 200);
+            // return response()->json($resultado, 200);
         if (is_null($resultado)) {
             return json_encode(0);
         }else {
@@ -28,7 +28,7 @@ class userController extends Controller
     }
 
     public function users(){
-        $usuarios = User::all();
+        $usuarios = DB::table('users')->get();
         return response()->json($usuarios);
     }
 }

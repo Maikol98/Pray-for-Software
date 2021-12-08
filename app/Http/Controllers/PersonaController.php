@@ -21,7 +21,7 @@ class PersonaController extends Controller
     public function indexSocios()
     {
         $persona = Persona::where('tipo',1)->get();
-
+        dd($persona);
         return response()->json($persona, 200);
         //return view();    colocan la vista si queriene
     }
