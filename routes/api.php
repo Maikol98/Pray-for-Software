@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'userController@login');
+Route::get('Usuarios', 'userController@users');
 
 //--------------------CATEGORIA----------------
 Route::apiResource('Categoria','CategoriaController'); //-
@@ -40,7 +41,7 @@ Route::post('todos/{carnet}','NegocioController@Todos');
 Route::apiResource('Negocio','NegocioController'); //-
 Route::get('Negocio/buscar','NegocioController@show'); //-
 
-//------------------PERSONA-------------------
+//------------------PERSONA-------------------s
 Route::get('Persona','PersonaController@index'); //-
 Route::get('Socio','PersonaController@indexSocios'); //-
 Route::post('Persona','PersonaController@store'); //-

@@ -26,4 +26,9 @@ class userController extends Controller
             return json_encode(0);
         }
     }
+
+    public function users(){
+        $usuarios = User::all();
+        return response()->json($usuarios);
+    }
 }
