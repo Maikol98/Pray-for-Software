@@ -30,10 +30,7 @@ class NegocioController extends Controller
     //BUSCAN SOCIOS
     public function index()
     {
-        $negocio = DB::table('negocios')
-            ->join('imagenes','negocios.id','=','imagenes.id_negocio')
-            ->select('imagenes.url','negocios.nombre')
-            ->where('negocios.buscasocio', 1)->get();
+        $negocio = Negocio::all();
 
         return response()->json($negocio, 200);
     }
